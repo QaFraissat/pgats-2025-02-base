@@ -196,23 +196,55 @@ node graphql/app.js
 ```
 Acesse o playground GraphQL em [http://localhost:4000/graphql](http://localhost:4000/graphql)
 
-## Endpoints REST
-- POST `/api/users/register` — Registro de usuário
-- POST `/api/users/login` — Login (retorna token JWT)
-- POST `/api/checkout` — Checkout (requer token JWT)
+## API de Transferências e Usuários
 
-## Regras de Checkout
-- Só pode fazer checkout com token JWT válido
-- Informe lista de produtos, quantidades, valor do frete, método de pagamento e dados do cartão se necessário
-- 5% de desconto no valor total se pagar com cartão
-- Resposta do checkout contém valor final
+Esta API permite o registro, login, consulta de usuários e transferências de valores entre usuários, com regras básicas de negócio e documentação via Swagger.
 
-## Banco de dados
-- Usuários e produtos em memória (veja arquivos em `src/models`)
+### Instalação
 
-## Testes
-- Para testes automatizados, importe o `app` de `rest/app.js` ou `graphql/app.js` sem o método `listen()`
+1. Clone o repositório e acesse a pasta do projeto.
+2. Instale as dependências:
 
-## Documentação
-- Swagger disponível em `/api-docs`
-- Playground GraphQL disponível em `/graphql`
+```
+npm install express swagger-ui-express
+```
+
+### Como rodar a API
+
+```
+node server.js
+```
+
+A API estará disponível em `http://localhost:3000`.
+
+### Documentação Swagger
+
+Acesse a documentação interativa em: [http://localhost:3000/api-docs](http://localhost:3000/api-docs)
+
+### Endpoints principais
+
+- `POST /users/register` — Registro de usuário
+- `POST /users/login` — Login de usuário
+- `GET /users` — Listar usuários
+- `POST /transfers` — Realizar transferência
+- `GET /transfers` — Listar transferências
+
+### Regras de negócio
+
+- Login exige usuário e senha.
+- Não é possível registrar usuários duplicados.
+- Transferências para destinatários não favorecidos só podem ser realizadas se o valor for menor que R$ 5.000,00.
+- Banco de dados em memória (os dados são perdidos ao reiniciar o servidor).
+
+### Estrutura do projeto
+
+- `controller/` — Rotas e validações
+- `service/` — Lógica de negócio
+- `model/` — Dados em memória
+- `app.js` — Configuração do Express
+- `server.js` — Inicialização do servidor
+- `swagger.json` — Documentação Swagger
+
+### Testes
+
+A API foi estruturada para facilitar testes automatizados, especialmente com Supertest, importando o `app.js` sem o método `listen()`.
