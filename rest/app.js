@@ -1,8 +1,10 @@
 const express = require('express');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger');
-const userRoutes = require('./routes/userRoutes');
-const checkoutRoutes = require('./routes/checkoutRoutes');
+/*const userRoutes = require('./routes/userRoutes');*/
+const userRoutes = require('../controllers/userController');
+const checkoutRoutes = require('../controllers/checkoutController');
+/*const checkoutRoutes = require('./routes/checkoutRoutes');*/
 
 const app = express();
 app.use(express.json());

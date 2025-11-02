@@ -1,4 +1,4 @@
-const app = require('../app');
+const app = require('../rest/routes/app');
 const request = require('supertest');
 const { expect } = require('chai');
 

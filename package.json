@@ -7,7 +7,7 @@
   "test": "mocha **/*.test.js",
   "test:root": "mocha api.test.js",
   "test:test": "mocha test/api.test.js"
-  },
+  }, 
   "repository": {
     "type": "git",
     "url": "git+https://github.com/juliodelimas/pgats-2025-02-base.git"
